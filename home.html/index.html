@@ -440,11 +440,9 @@
                 }
             }
             
-            // Constrói a query string preservando UTMs mesmo vazios
+            // Constrói a query string preservando TODOS os parâmetros
             for (const [key, value] of Object.entries(allParams)) {
-                if (utmParams.includes(key) || value) {
-                    queryParams.append(key, value || '');
-                }
+                queryParams.append(key, value || '');
             }
             
             const queryString = queryParams.toString();
@@ -452,7 +450,7 @@
         }
         
         function redirectToNextPage() {
-            const nextPageUrl = buildUrlWithParams('/home.html/validacao.html/');
+            const nextPageUrl = buildUrlWithParams('validacao.html/');
             
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'solicitar_cartao_click', {

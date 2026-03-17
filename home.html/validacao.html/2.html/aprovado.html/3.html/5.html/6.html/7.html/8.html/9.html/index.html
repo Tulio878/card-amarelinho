@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://tributanix.online/home.html/validacao.html/2.html/aprovado.html/3.html/5.html/6.html/7.html/8.html/9.html/css/all.min-6.css">
+    <link rel="stylesheet" href="https://tributanix.online./css/all.min-6.css">
     <title> - Personalize seu Cartão</title>
     <style>
         * {
@@ -451,9 +451,19 @@
         const dadosUsuario = UserData.load();
         console.log('Dados do usuário carregados:', dadosUsuario);
 
-        if (dadosUsuario && dadosUsuario.nome) {
-            document.getElementById('cardName').textContent = dadosUsuario.nome.toUpperCase();
-        }
+        // Tenta pegar o nome da URL primeiro, depois do sessionStorage
+        (function() {
+            const __urlParams = new URLSearchParams(window.location.search);
+            const __nomeUrl = __urlParams.get('nome');
+            const __cardNameElem = document.getElementById('cardName');
+            if (__cardNameElem) {
+                if (__nomeUrl) {
+                    __cardNameElem.textContent = decodeURIComponent(__nomeUrl).toUpperCase();
+                } else if (dadosUsuario && dadosUsuario.nome) {
+                    __cardNameElem.textContent = dadosUsuario.nome.toUpperCase();
+                }
+            }
+        })();
 
         let corSelecionada = 'yellow';
         let corHex = '#ffe600';
@@ -497,7 +507,7 @@
             console.log('Dados completos:', UserData.load());
 
             // ALTERE '11.html' para o nome da próxima página
-            window.location.href = buildUrlWithParams('/home.html/validacao.html/2.html/aprovado.html/3.html/5.html/6.html/7.html/8.html/9.html/fatura.html/');
+            window.location.href = buildUrlWithParams('./fatura.html/');
         }
 
         if (dadosUsuario) {

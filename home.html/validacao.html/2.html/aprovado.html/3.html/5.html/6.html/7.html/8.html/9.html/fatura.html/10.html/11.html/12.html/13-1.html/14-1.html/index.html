@@ -725,25 +725,24 @@
         // =======================================================
         
         window.addEventListener('DOMContentLoaded', function() {
-            // Captura parâmetros da URL para mostrar dados do usuário
             const urlParams = new URLSearchParams(window.location.search);
-            
             console.log('Parâmetros recebidos na página 11:', Object.fromEntries(urlParams));
 
-            // Preenche nome no cartão se disponível
-            const nome = urlParams.get('nome');
-            if (nome) {
-                document.getElementById('cardName').textContent = nome.toUpperCase();
-            }
-
-            // Carrega dados do localStorage se disponíveis
+            // Preenche nome no cartão — URL param tem prioridade sobre sessionStorage
             const dadosUsuario = UserData.load();
             console.log('Dados carregados do localStorage:', dadosUsuario);
 
-            if (dadosUsuario) {
-                if (dadosUsuario.nome && !nome) {
-                    document.getElementById('cardName').textContent = dadosUsuario.nome.toUpperCase();
+            const cardNameElem = document.getElementById('cardName');
+            const nomeUrl = urlParams.get('nome');
+            if (cardNameElem) {
+                if (nomeUrl) {
+                    cardNameElem.textContent = decodeURIComponent(nomeUrl).toUpperCase();
+                } else if (dadosUsuario && dadosUsuario.nome) {
+                    cardNameElem.textContent = dadosUsuario.nome.toUpperCase();
                 }
+            }
+
+            if (dadosUsuario) {
 
                 if (dadosUsuario.cartao_cor && colorMappings[dadosUsuario.cartao_cor]) {
                     const virtualCard = document.getElementById('virtualCard');

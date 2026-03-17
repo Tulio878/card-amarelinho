@@ -1,13 +1,17 @@
-<!DOCTYPE html><html lang="pt-BR"><head>
-    <script src="https://tributanix.online/psl/js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
-<script>
-  window.googlePixelId = "691d28d6b15e4f74fd070041";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-google.js");
-  document.head.appendChild(a);
-</script>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script src="https://tributanix.online/psl/js/latest.js" data-utmify-prevent-xcod-sck=""
+        data-utmify-prevent-subids="" async="" defer=""></script>
+    <script>
+        window.googlePixelId = "691d28d6b15e4f74fd070041";
+        var a = document.createElement("script");
+        a.setAttribute("async", "");
+        a.setAttribute("defer", "");
+        a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-google.js");
+        document.head.appendChild(a);
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Análise - Presell</title>
@@ -62,9 +66,9 @@
             overflow: hidden;
             margin-bottom: 20px;
             position: relative;
-            box-shadow: 
-                inset 0 2px 4px rgba(0,0,0,0.1),
-                0 2px 8px rgba(0,0,0,0.1);
+            box-shadow:
+                inset 0 2px 4px rgba(0, 0, 0, 0.1),
+                0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .progress-fill {
@@ -84,10 +88,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(255,255,255,0.3) 50%, 
-                transparent 100%);
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    rgba(255, 255, 255, 0.3) 50%,
+                    transparent 100%);
             animation: shimmer 2s infinite;
         }
 
@@ -98,20 +102,30 @@
             left: 2px;
             right: 2px;
             height: 12px;
-            background: linear-gradient(180deg, 
-                rgba(255,255,255,0.4) 0%, 
-                transparent 100%);
+            background: linear-gradient(180deg,
+                    rgba(255, 255, 255, 0.4) 0%,
+                    transparent 100%);
             border-radius: 13px;
         }
 
         @keyframes progressLoad {
-            0% { width: 0%; }
-            100% { width: 100%; }
+            0% {
+                width: 0%;
+            }
+
+            100% {
+                width: 100%;
+            }
         }
 
         @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
         }
 
         .progress-text {
@@ -122,7 +136,7 @@
             font-size: 16px;
             font-weight: bold;
             color: black;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
             z-index: 10;
         }
 
@@ -199,7 +213,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0, 0, 0, 0.5);
             animation: fadeIn 0.3s ease;
         }
 
@@ -217,13 +231,25 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .close {
@@ -269,15 +295,15 @@
             .container {
                 padding: 40px 20px;
             }
-            
+
             .main-title {
                 font-size: 36px;
             }
-            
+
             .subtitle {
                 font-size: 16px;
             }
-            
+
             .cta-button {
                 font-size: 18px;
                 padding: 18px 30px;
@@ -305,20 +331,18 @@
         }
     </style>
 </head>
+
 <body>
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W2NK2Z4N"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+
     <div class="container">
         <div class="main-title">
             Sua análise está sendo preparada...
         </div>
-        
+
         <div class="subtitle">
             Clique no botão para iniciar sua análise!
         </div>
-        
+
         <div class="progress-container">
             <div class="progress-bar">
                 <div class="progress-fill"></div>
@@ -326,11 +350,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <div class="ready-text" id="status-text">Analisando dados...</div>
         </div>
-        
+
         <button class="cta-button" onclick="handleClick()">
             EFETUAR ANÁLISE
         </button>
-        
+
         <div class="footer-links">
             <a href="https://tributanix.online/politica-de-privacidade">Política de Privacidade</a>
             <span class="separator">|</span>
@@ -350,25 +374,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </div>
 
-   <script>
-    function handleClick() {
-        // Criar URL baseada no domínio atual
-        const targetUrl = new URL('/home.html/', window.location.origin);
-        
-        // Preservar TODOS os parâmetros da URL atual
-        const currentParams = new URLSearchParams(window.location.search);
-        const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'xcod', 'sck'];
-        
-        utmParams.forEach(param => {
-            const value = currentParams.get(param);
-            targetUrl.searchParams.set(param, value || '');
-        });
-        
-        // Redirecionar mantendo o domínio atual
-        window.location.href = targetUrl.href;
-    }
-</script>
+    <script>
+        function handleClick() {
+            // Criar URL baseada no domínio atual
+            const targetUrl = new URL('../home.html/', window.location.origin);
+
+            // Preservar TODOS os parâmetros da URL atual
+            const currentParams = new URLSearchParams(window.location.search);
+            
+            for (const [key, value] of currentParams.entries()) {
+                targetUrl.searchParams.set(key, value || '');
+            }
+
+            // Redirecionar mantendo o domínio atual
+            window.location.href = targetUrl.href;
+        }
+    </script>
 
 
 
-</body></html>
+</body>
+
+</html>

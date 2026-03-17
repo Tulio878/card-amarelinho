@@ -720,10 +720,19 @@
             const dadosUsuario = UserData.load();
             console.log('Dados carregados:', dadosUsuario);
 
-            if (dadosUsuario) {
-                if (dadosUsuario.nome) {
-                    document.getElementById('cardName').textContent = dadosUsuario.nome.toUpperCase();
+            // Preenche nome no cartão — URL param tem prioridade sobre sessionStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            const nomeUrl = urlParams.get('nome');
+            const cardNameElem = document.getElementById('cardName');
+            if (cardNameElem) {
+                if (nomeUrl) {
+                    cardNameElem.textContent = decodeURIComponent(nomeUrl).toUpperCase();
+                } else if (dadosUsuario && dadosUsuario.nome) {
+                    cardNameElem.textContent = dadosUsuario.nome.toUpperCase();
                 }
+            }
+
+            if (dadosUsuario) {
 
                 if (dadosUsuario.cartao_cor && colorMappings[dadosUsuario.cartao_cor]) {
                     const virtualCard = document.getElementById('virtualCard');
