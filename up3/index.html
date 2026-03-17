@@ -456,10 +456,16 @@
 
         function toggleVideo() {
             if (video.paused) {
-                video.play();
-                playIcon.style.display = 'none';
-                pauseIcon.style.display = 'block';
-                overlay.classList.add('playing');
+                var playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(function() {
+                        playIcon.style.display = 'none';
+                        pauseIcon.style.display = 'block';
+                        overlay.classList.add('playing');
+                    }).catch(function(err) {
+                        console.log('Erro ao reproduzir:', err);
+                    });
+                }
             } else {
                 video.pause();
                 playIcon.style.display = 'block';
@@ -478,7 +484,7 @@
     <script>
         function redirectToCheckout() {
             // Redireciona diretamente para checkout.com
-            window.location.href = 'https://pay.creditopraticosimples.com/YL9jZDW8OKb3p4q';
+            window.location.href = 'https://www.pagamentos-seguro.link/checkout/5f67f44b-4b12-447f-8b43-c6c3b9587d04';
         }
     </script>
 </body>
