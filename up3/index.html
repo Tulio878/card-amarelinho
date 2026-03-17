@@ -145,10 +145,18 @@
             border-radius: 16px;
         }
 
+        /* Esconde overlay quando rodando — completamente invisível e sem bloquear */
         .play-overlay.playing {
             background: transparent;
             opacity: 0;
             pointer-events: none;
+        }
+
+        /* Ao passar o mouse enquanto toca, mostra o botão de pausa */
+        .video-wrapper:hover .play-overlay.playing {
+            background: rgba(0, 0, 0, 0.2);
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .play-btn {
