@@ -1,0 +1,11 @@
+.DS_Store
+*.pyc
+__pycache__/
+node_modules/
+.vscode/
+.idea/
+*.log
+.py
+fix_card_name.py
+fix_card_name2.py
+fix_cardname.py
