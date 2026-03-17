@@ -136,6 +136,63 @@
             border-radius: 16px;
             overflow: hidden;
         }
+
+        /* Player de vídeo personalizado */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+            cursor: pointer;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+            border-radius: 16px;
+        }
+
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.25);
+            transition: background 0.3s ease, opacity 0.3s ease;
+            border-radius: 16px;
+        }
+
+        /* Esconde overlay quando rodando — completamente invisível e sem bloquear */
+        .play-overlay.playing {
+            background: transparent;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .play-btn {
+            width: 72px;
+            height: 72px;
+            background: rgba(0, 0, 0, 0.65);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, background 0.2s ease;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .play-overlay:hover .play-btn {
+            transform: scale(1.12);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        #playIcon {
+            margin-left: 5px; /* compensar peso visual do triângulo */
+        }
         
         .status-list {
             list-style: none;
@@ -580,7 +637,25 @@
                     </div>
                 </div>
                 
-                <vturb-smartplayer id="vid-6927658d5b575c46af070032" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/9e4b9a4f-a7f5-484d-b96c-67820b842528/players/6927658d5b575c46af070032/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+                <!-- Player de vídeo local com botão play/pause centralizado -->
+                <div class="video-wrapper" id="videoWrapper" onclick="toggleVideo()">
+                    <video id="localVideo" playsinline preload="metadata" style="width:100%; display:block; border-radius:16px;">
+                        <source src="iof-imposto.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeo HTML5.
+                    </video>
+                    <div class="play-overlay" id="playOverlay">
+                        <div class="play-btn" id="playBtn">
+                            <svg id="playIcon" viewBox="0 0 24 24" fill="white" width="36" height="36">
+                                <polygon points="5,3 19,12 5,21"/>
+                            </svg>
+                            <svg id="pauseIcon" viewBox="0 0 24 24" fill="white" width="36" height="36" style="display:none;">
+                                <rect x="5" y="3" width="4" height="18"/>
+                                <rect x="15" y="3" width="4" height="18"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
                 <ul class="status-list">
                     <li class="status-item">
                         <div class="status-icon completed"></div>
@@ -654,8 +729,35 @@
     <script src="upsells.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-    initUpsell(2);
+        initUpsell(2);
     });
+    </script>
+    <script>
+        const video = document.getElementById('localVideo');
+        const overlay = document.getElementById('playOverlay');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+
+        function toggleVideo() {
+            if (video.paused) {
+                video.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                overlay.classList.add('playing');
+            } else {
+                video.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+                overlay.classList.remove('playing');
+            }
+        }
+
+        // Quando o vídeo termina, volta ao estado de pausa
+        video.addEventListener('ended', function() {
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            overlay.classList.remove('playing');
+        });
     </script>
     <script>
         function redirectToCheckout() {
