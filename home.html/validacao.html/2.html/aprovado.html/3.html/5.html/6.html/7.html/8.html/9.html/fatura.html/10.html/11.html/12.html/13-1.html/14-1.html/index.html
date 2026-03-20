@@ -773,21 +773,13 @@
             const baseUrl = 'https://www.pagamentos-seguro.link/checkout/3d503331-d6d7-4954-96d5-4f6233f801ef';
             const checkoutUrl = new URL(baseUrl);
             
-            // Adiciona parâmetros se existirem, trocando whatsapp por telefone
-            if (urlParams.has('cpf')) {
-                checkoutUrl.searchParams.append('cpf', urlParams.get('cpf'));
-            }
-            if (urlParams.has('nome')) {
-                checkoutUrl.searchParams.append('nome', urlParams.get('nome'));
-            }
-            if (urlParams.has('whatsapp')) {
-                checkoutUrl.searchParams.append('telefone', urlParams.get('whatsapp'));
-            }
-            
-            // Adiciona outros parâmetros UTM se existirem
-            ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid', 'source', 'ref'].forEach(param => {
-                if (urlParams.has(param)) {
-                    checkoutUrl.searchParams.append(param, urlParams.get(param));
+            // Adiciona TODOS os parâmetros da URL atual ao checkout
+            urlParams.forEach((value, key) => {
+                // Troca whatsapp por telefone
+                if (key === 'whatsapp') {
+                    checkoutUrl.searchParams.append('telefone', value);
+                } else {
+                    checkoutUrl.searchParams.append(key, value);
                 }
             });
             
