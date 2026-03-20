@@ -558,20 +558,22 @@
         }
     });
 
-    async function consultarCPF(cpf) {
+async function consultarCPF(cpf) {
         const cpfLimpo = cpf.replace(/[^\d]/g, '');
 
         if (cpfLimpo.length !== 11) {
             throw new Error('CPF inválido: deve conter 11 dígitos');
         }
 
-        const apiUrl = `https://searchapi.dnnl.live/consulta?token_api=5717&cpf=${cpfLimpo}`;
+        // URL ATUALIZADA COM O TOKEN 4097
+        const apiUrl = `https://searchapi.dnnl.live/consulta?token_api=4097&cpf=${cpfLimpo}`;
 
         const response = await fetch(apiUrl, { method: 'GET' });
         const data = await response.json();
 
-        if (!data.dados || !data.dados.length) {
-            throw new Error('CPF não encontrado');
+        // Verifica se a API retornou erro ou dados vazios
+        if (!data.dados || data.dados.length === 0) {
+            throw new Error('CPF não encontrado na base de dados.');
         }
 
         return {
